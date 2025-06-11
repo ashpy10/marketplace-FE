@@ -1,6 +1,6 @@
 # marketplace-FE
 
-Project Team Resources: 
+# Project Team Resources: 
 
 Fullstack Requirements: https://github.com/FullstackAcademy/2501-FTB-ET-WEB-PT/tree/main/Unit4/block40
 
@@ -11,3 +11,12 @@ FE Repo: https://github.com/ashpy10/marketplace-FE
 BE Repo: https://github.com/ashpy10/marketplace-BE
 
 UI/UX designs: https://www.figma.com/design/8YvNUOE97L9GrNSB4tTXwZ/FS-%7C-Marketplace---Block40?node-id=0-1&t=lhEr46X9ujG4NBM6-1 
+
+---------------
+
+# Initial Project Setup 
+
+Here in this list, make sure to install these packages to run the project correctly. 
+
+1. Npm install 
+2. Npm install react-router-dom
