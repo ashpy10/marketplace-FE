@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   padding: 2rem;
+  overflow: hidden; /* Prevent any potential overflow from animation */
 }
 
 .hero-content {
@@ -77,6 +78,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* Add positioning context */
 }
 
 .hero-image img {
@@ -84,6 +86,35 @@
   height: auto;
   max-height: 600px;
   object-fit: contain;
+  border-radius: 8px; /* Optional: adds slight rounding to the gif edges */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow */
+  transition: transform 0.3s ease; /* Smooth transform animations */
+}
+
+.hero-image img:hover {
+  transform: scale(1.02); /* Subtle zoom effect on hover */
+}
+
+.hero-image.loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Responsive Design */

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/components/home/Hero.css';
 
 const Hero = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <section className="hero">
       <div className="hero-content">
@@ -14,8 +16,13 @@ const Hero = () => {
             <Link to="/join" className="btn btn-secondary">JOIN THE CLUB</Link>
           </div>
         </div>
-        <div className="hero-image">
-          <img src="/sauce-bottle.png" alt="Chow Wow Hot Sauce Bottle" />
+        <div className={`hero-image ${isLoading ? 'loading' : ''}`}>
+          <img 
+            src="https://res.cloudinary.com/daw3nco1o/image/upload/v1749678628/hero_video.gif" 
+            alt="Hot Sauce Bottle Animation" 
+            onLoad={() => setIsLoading(false)}
+            loading="eager"
+          />
         </div>
       </div>
     </section>
