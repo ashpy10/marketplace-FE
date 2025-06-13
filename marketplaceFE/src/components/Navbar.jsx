@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <NavLink to="/" className="navbar-logo">
           <img src="https://res.cloudinary.com/daw3nco1o/image/upload/v1749678614/logo-black.png" alt="Sauciety Logo" className="nav-logo" />
-        </Link>
+        </NavLink>
         
         <div className="nav-links">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/products" className="nav-link">Our Sauces</Link>
-          <Link to="/login" className="nav-link">Login</Link>
-          <Link to="/account" className="nav-link">My Account</Link>
+          <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} end>Home</NavLink>
+          <NavLink to="/products" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Our Sauces</NavLink>
+          <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink>
+          <NavLink to="/account" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>My Account</NavLink>
         </div>
       </div>
     </nav>
