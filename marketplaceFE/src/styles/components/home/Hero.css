@@ -1,39 +1,60 @@
 .hero {
-  min-height: 80vh;
-  background-color: #f8f8f8;
+  min-height: 350px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 2rem;
-  overflow: hidden; /* Prevent any potential overflow from animation */
+  overflow: hidden; 
+  border-radius: 10px;
+  background-image: url('/wood-1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-content {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   width: 100%;
 }
 
 .hero-text {
-  flex: 1;
-  max-width: 600px;
+  flex: 3;
+  max-width: 800px;
 }
 
 .hero-text h1 {
   font-size: 4.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #F5F5F5;
   margin-bottom: 1rem;
   line-height: 1.1;
 }
 
 .hero-subtitle {
   font-size: 2rem;
-  color: #666;
+  color: #eea361;
+  font-style: italic;
   margin-bottom: 2rem;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.2em;
+}
+
+.hero-subtitle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40%;
+  height: 0.4em; 
+  background: #aa3a36;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero-buttons {
@@ -52,60 +73,46 @@
 }
 
 .btn-primary {
-  background-color: #1a1a1a;
+  background-color: #0C6667;
   color: white;
-  border: 2px solid #1a1a1a;
+  border: 2px solid #0C6667;
 }
 
 .btn-primary:hover {
   background-color: transparent;
-  color: #1a1a1a;
+  color: #0C6667;
+  color: #ffffff;
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: #1a1a1a;
-  border: 2px solid #1a1a1a;
+  color: #ffffff;
+  border: 2px solid #0C6667;
 }
 
 .btn-secondary:hover {
-  background-color: #1a1a1a;
+  background-color: #0C6667;
   color: white;
 }
 
 .hero-image {
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* Add positioning context */
+  position: relative;
+  min-width: 650px;
 }
 
 .hero-image img {
   max-width: 100%;
+  min-width: 450px;
   height: auto;
-  max-height: 600px;
-  object-fit: contain;
-  border-radius: 8px; /* Optional: adds slight rounding to the gif edges */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow */
-  transition: transform 0.3s ease; /* Smooth transform animations */
-}
-
-.hero-image img:hover {
-  transform: scale(1.02); /* Subtle zoom effect on hover */
-}
-
-.hero-image.loading::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
+  max-height: 1200px;
+  object-fit: fill;
   border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 @keyframes loading {
@@ -126,6 +133,13 @@
   .hero-subtitle {
     font-size: 1.5rem;
   }
+  .hero-image {
+    min-width: 220px;
+  }
+  .hero-image img {
+    min-width: 180px;
+    max-height: 400px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -143,6 +157,11 @@
   }
   
   .hero-image {
-    margin-top: 2rem;
+    min-width: 0;
+  }
+  .hero-image img {
+    min-width: 0;
+    max-width: 100%;
+    max-height: 300px;
   }
 } 
