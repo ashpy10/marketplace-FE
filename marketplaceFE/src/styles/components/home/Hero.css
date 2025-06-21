@@ -1,15 +1,29 @@
 .hero {
-  min-height: 350px;
-  width: 100%;
+  min-height: 50vh;
   display: flex;
   align-items: center;
-  padding: 2rem;
-  overflow: hidden; 
-  border-radius: 10px;
-  background-image: url('/wood-1.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  padding: 2rem 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/stone.jpg') center center/cover no-repeat;
+  opacity: 0.4;
+  z-index: -1;
 }
 
 .hero-content {
@@ -19,6 +33,7 @@
   align-items: center;
   gap: 2.5rem;
   width: 100%;
+  padding-left: 4rem;
 }
 
 .hero-text {
@@ -29,14 +44,18 @@
 .hero-text h1 {
   font-size: 4.5rem;
   font-weight: 700;
-  color: #F5F5F5;
+  color: #aa3a36;
   margin-bottom: 1rem;
   line-height: 1.1;
+  text-shadow: 
+    1px 1px 0 #fff,
+    2px 2px 0 #fff,
+    3px 3px 0 #fff;
 }
 
 .hero-subtitle {
   font-size: 2rem;
-  color: #eea361;
+  color: #000000;
   font-style: italic;
   margin-bottom: 2rem;
   display: inline-block;
@@ -52,7 +71,7 @@
   right: 0;
   top: 40%;
   height: 0.4em; 
-  background: #aa3a36;
+  background: #eea361;
   z-index: -1;
   pointer-events: none;
 }
@@ -74,7 +93,7 @@
 
 .btn-primary {
   background-color: #0C6667;
-  color: white;
+  color: #ffffff;
   border: 2px solid #0C6667;
 }
 
@@ -86,7 +105,7 @@
 
 .btn-secondary {
   background-color: transparent;
-  color: #ffffff;
+  color: black;
   border: 2px solid #0C6667;
 }
 
