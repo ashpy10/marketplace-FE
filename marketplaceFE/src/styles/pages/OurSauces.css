@@ -1,0 +1,92 @@
+
+.our-sauces-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem 2rem;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.our-sauces-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.our-sauces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.sauce-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s;
+}
+.sauce-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+.sauce-image-wrapper {
+  width: 160px;
+  height: 160px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.sauce-image {
+  max-width: 90%;
+  max-height: 140px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.sauce-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.sauce-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #D97706;
+  margin-bottom: 0.7rem;
+}
+.sauce-description {
+  font-size: 1rem;
+  color: #444;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.our-sauces-loading,
+.our-sauces-error {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #888;
+  margin-top: 4rem;
+}
+
+@media (max-width: 900px) {
+  .our-sauces-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .our-sauces-grid {
+    grid-template-columns: 1fr;
+  }
+} 

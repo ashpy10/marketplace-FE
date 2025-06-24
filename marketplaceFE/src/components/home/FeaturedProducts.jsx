@@ -4,6 +4,7 @@ import '../../styles/components/home/FeaturedProducts.css';
 
 const products = [
   {
+    id: 6,
     name: 'Flannel Inferno',
     style: 'Cayenne-Maple Blend Hot Sauce',
     heat: '8/10',
@@ -12,6 +13,7 @@ const products = [
     buttonColor: '#ffffff',
   },
   {
+    id: 2,
     name: 'Mildly Inappropriate',
     style: 'Jalapeño & Lime',
     heat: '5/10',
@@ -20,6 +22,7 @@ const products = [
     buttonColor: '#ffffff',
   },
   {
+    id: 4,
     name: 'Reapers Kiss',
     style: 'Carolina Reaper Hot Sauce',
     heat: '10/10',
@@ -28,6 +31,7 @@ const products = [
     buttonColor: '#ffffff',
   },
   {
+    id: 7,
     name: 'Burnout Culture',
     style: 'Garlic & Scorpion Pepper',
     heat: '9/10',
@@ -67,7 +71,7 @@ const FeaturedProducts = () => {
             <div className="product-image-container-carousel">
               <img src={currentProduct.imageUrl} alt={currentProduct.name} />
               <Link 
-                to={`/products/${currentProduct.name.toLowerCase().replace(/ /g, '-')}`} 
+                to={`/products/${currentProduct.id}`} 
                 className="btn-learn-more"
                 style={{ backgroundColor: currentProduct.buttonColor }}
               >
