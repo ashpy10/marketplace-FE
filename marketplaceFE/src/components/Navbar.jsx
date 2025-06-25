@@ -13,8 +13,16 @@ const Navbar = () => {
         <div className="nav-links">
           <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} end>Home</NavLink>
           <NavLink to="/products" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Our Sauces</NavLink>
-          <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink>
-          <NavLink to="/account" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>My Account</NavLink>
+                    
+                    {!token ? (
+            <NavLink to="/login" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+              Login
+            </NavLink>
+          ) : (
+            <NavLink to="/account" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+              My Account
+            </NavLink>
+          )}
         </div>
       </div>
     </nav>
