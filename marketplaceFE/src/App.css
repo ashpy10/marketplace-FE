@@ -1,0 +1,26 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+  z-index: 0;  
+  background-color: white;
+}
+
+.nav-bar-content {
+  padding-top: 80px; /* This accounts for the fixed navbar */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'League Spartan', sans-serif;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  

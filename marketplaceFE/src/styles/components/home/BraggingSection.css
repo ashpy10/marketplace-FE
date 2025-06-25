@@ -1,0 +1,62 @@
+.bragging-section {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bragging-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 2rem;
+}
+
+.bragging-text {
+  flex: 1;
+  text-align: center;
+}
+
+.bragging-text.left h3 {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+.bragging-text.right p {
+  font-size: 1.5rem;
+  color: #333;
+  line-height: .5;
+}
+
+.bragging-image {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bragging-image img {
+  max-width: 100%;
+  max-height: 700px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .bragging-content {
+    flex-direction: column;
+  }
+  .bragging-text.left h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .bragging-text.right p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+} 

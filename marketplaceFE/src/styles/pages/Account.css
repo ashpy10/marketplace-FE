@@ -1,0 +1,103 @@
+.account-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem 2rem;
+    font-family: 'Inter', Arial, sans-serif;
+  }
+  
+  .account-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  .account-user-info {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .account-orders-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .account-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  
+  .account-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+  }
+  
+  .account-card:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+  
+  .account-order-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  .account-order-date {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #D97706;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .account-item {
+    font-size: 1rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .account-loading,
+  .account-empty {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #888;
+    margin-top: 4rem;
+  }
+  
+  .account-logout-btn {
+    display: block;
+    margin: 3rem auto 0 auto;
+    padding: 0.75rem 1.5rem;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 900px) {
+    .account-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .account-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
