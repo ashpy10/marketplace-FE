@@ -87,7 +87,7 @@ return (
 
             <button className="account-logout-btn" onClick={handleLogout}>Logout</button>
         </div>
-    )
+     )
 }
 
 export default Account
