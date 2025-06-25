@@ -13,7 +13,7 @@ const Hero = () => {
           <p className="hero-subtitle">Craft Heat for Brave Palates</p>
           <div className="hero-buttons">
             <Link to="/products" className="btn btn-primary">SHOP NOW</Link>
-            <Link to="/join" className="btn btn-secondary">JOIN THE CLUB</Link>
+            <Link to="/login" className="btn btn-secondary">JOIN THE CLUB</Link>
           </div>
         </div>
         <div className={`hero-image ${isLoading ? 'loading' : ''}`}>
