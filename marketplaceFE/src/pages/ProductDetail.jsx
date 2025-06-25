@@ -35,7 +35,7 @@ const ProductDetail = () => {
 
       if (!token) return;
       try {
-        const response = await fetch(`/api/products/${id}/reviews`, {
+        const response = await fetch(`/api/reviews/products/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) throw new Error("Could not fetch reviews");
