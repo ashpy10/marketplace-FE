@@ -11,21 +11,27 @@ export default function Login({ setToken }) {
     event.preventDefault();
 
     try {
-      const res = await fetch("api/users/login", {
+      const res = await fetch("/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
-      const result = await res.json();
-      console.log(result);
+      console.log("Response status:", res.status);
 
-      if (result.token) {
-        localStorage.setItem("authToken", result.token);
-        setToken(result.token);
+      // Read response as text for debugging
+      const text = await res.text();
+      console.log("Response text:", text);
+
+      // Parse JSON only if there is text
+      const data = text ? JSON.parse(text) : {};
+
+      if (res.ok && data.token) {
+        localStorage.setItem("authToken", data.token);
+        setToken(data.token);
         navigate("/account");
       } else {
-        setError(result.error || "Login failed.");
+        setError(data.error || `Login failed: ${res.statusText}`);
       }
     } catch (err) {
       setError(err.message || "An error occurred.");
@@ -43,6 +49,7 @@ export default function Login({ setToken }) {
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -52,6 +59,7 @@ export default function Login({ setToken }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </label>
         <button type="submit">Submit</button>
