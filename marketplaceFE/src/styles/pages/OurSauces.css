@@ -1,18 +1,28 @@
-
+/* === Our Sauces Page === */
 .our-sauces-container {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 3rem 2rem 2rem 2rem;
-  font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .our-sauces-title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #1a1a1a;
   margin-bottom: 2.5rem;
   text-align: center;
   letter-spacing: 1px;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #eea361;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  text-shadow: 
+    1px 1px 0 #aa3a36,
+    2px 2px 0 #aa3a36,
+    3px 3px 0 #aa3a36;
 }
 
 .our-sauces-grid {
@@ -22,8 +32,8 @@
 }
 
 .sauce-card {
-  background: #fff;
   border-radius: 12px;
+  background-color: #FFF6F3 ;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   padding: 2rem 1.5rem 1.5rem 1.5rem;
   display: flex;
@@ -32,30 +42,29 @@
   transition: box-shadow 0.2s;
 }
 .sauce-card:hover {
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 24px #eea361;
 }
 
 .sauce-image-wrapper {
-  width: 160px;
+  width: 350px;
   height: 160px;
-  background: #f5f5f5;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .sauce-image {
   max-width: 90%;
-  max-height: 140px;
+  max-height: 220px;
   object-fit: contain;
-  border-radius: 6px;
 }
 
 .sauce-title {
   font-size: 1.3rem;
   font-weight: 700;
   color: #1a1a1a;
+  text-decoration: none;
   margin-bottom: 0.5rem;
   text-align: center;
 }
@@ -70,6 +79,7 @@
   color: #444;
   text-align: center;
   margin-bottom: 0.5rem;
+  text-decoration: none;
 }
 
 .our-sauces-loading,
@@ -78,6 +88,19 @@
   font-size: 1.3rem;
   color: #888;
   margin-top: 4rem;
+}
+
+.sauce-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.sauce-card-link:visited,
+.sauce-card-link:active,
+.sauce-card-link:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
 @media (max-width: 900px) {
