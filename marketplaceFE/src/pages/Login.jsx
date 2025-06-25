@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../styles/pages/Login.css"
 
 export default function Login({ setToken }) {
   const [username, setUsername] = useState("");
@@ -39,7 +40,7 @@ export default function Login({ setToken }) {
   }
 
   return (
-    <div className="login">
+    <div className="auth-container">
       <h1>Login</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleLogin}>
@@ -64,6 +65,8 @@ export default function Login({ setToken }) {
         </label>
         <button type="submit">Submit</button>
       </form>
+      <p>Dont have an account?</p>
+      <Link to="/register">Sign Up</Link>
     </div>
   );
 }

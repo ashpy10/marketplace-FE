@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/pages/Login.css"
 
 export default function Register({ setToken }) {
   const [username, setUsername] = useState("");
@@ -37,7 +38,7 @@ export default function Register({ setToken }) {
   }
 
   return (
-    <div className="register">
+    <div className="auth-container">
       <h1>Register an Account</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
