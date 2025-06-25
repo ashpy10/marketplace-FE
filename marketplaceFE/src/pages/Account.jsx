@@ -1,94 +1,100 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../styles/pages/Account.css';
+import "../styles/pages/Account.css";
 
 const Account = () => {
-    const [user, setUser] = useState(null);
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
 
-    useEffect(() => {
-        if (!token) {
-            navigate("/login");
-            return;
-        }
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
-        fetchAccount();
-    }, [token, navigate]);
-    
-        async function fetchAccount() {
-        try {
-            const userResponse = await fetch("/api/users/account", {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              });
+    const fetchData = async () => {
+      try {
+        // Fetch user account info
+        const userRes = await fetch("/api/users/account", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const userData = await userRes.json();
+        if (!userRes.ok) throw new Error(userData.error || "Failed to load user info");
+        setUser(userData);
 
-            const userResult = await userResponse.json()
-            if (userResponse.ok) setUser(userResult); 
-            
-            const orderResponse = await fetch("/orders", {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                  },
-            });
+        // Fetch user's orders
+        const ordersRes = await fetch("/api/orders", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const ordersData = await ordersRes.json();
+        if (!ordersRes.ok) throw new Error(ordersData.error || "Failed to load orders");
+        setOrders(ordersData);
 
-            const orderResult = await orderResponse.json()
-            if (orderResponse.ok) setOrders(orderResult)
-        } catch(error) {
-            console.error("User order fetch error: ", error)
-        } finally {
-            setLoading(false);
-        }
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    function handleLogout() {
-        localStorage.removeItem("token")
-        navigate("/login")
-    } 
+    fetchData();
+  }, [token, navigate]);
 
-    if (loading) return <div className="account-loading">Loading...</div>
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
 
+  if (loading) return <div className="account-loading">Loading...</div>;
+  if (error) return <div className="account-error">Error: {error}</div>;
 
-return (
+  return (
     <div className="account-container">
-        <h1 className="account-title">My Account</h1>
+      <h1 className="account-title">My Account</h1>
 
-        {user && (
-            <div className="account-user-info">
-            <p><strong>Email:</strong> {user.email}</p>
-            </div>
-        )}
-
-        <h2 className="account-orders-title">My Orders</h2> 
-
-        {orders.length > 0 ? (
-            <div className="account-grid">
-                {orders.map((order) => (
-                    <div key={order.id} className="account-card">
-                        <h3 className="account-order-header">Order #{order.id}</h3>
-                        <p className="account-order-date">
-                            Placed on {new Date(order.date).toLocaleDateString()}
-                        </p>
-                        {order.note && (
-                            <p className="account-item"><strong>Note:</strong> {order.note}</p>
-                        )}
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <div className="account-empty">You have no orders yet.</div>
-            )}
-
-            <button className="account-logout-btn" onClick={handleLogout}>Logout</button>
+      {user && (
+        <div className="account-user-info">
+          <p><strong>Username:</strong> {user.username}</p>
         </div>
-     )
-}
+      )}
 
-export default Account
+      <h2 className="account-orders-title">My Orders</h2>
 
+      {orders.length > 0 ? (
+        <div className="account-grid">
+          {orders.map((order) => (
+            <div key={order.id} className="account-card">
+              <h3 className="account-order-header">Order #{order.id}</h3>
+              <p className="account-order-date">
+                Placed on {new Date(order.date).toLocaleDateString()}
+              </p>
+              {order.note && (
+                <p className="account-item"><strong>Note:</strong> {order.note}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="account-empty">You have no orders yet.</div>
+      )}
+
+      <button className="account-logout-btn" onClick={handleLogout}>
+        Logout
+      </button>
+    </div>
+  );
+};
+
+export default Account;

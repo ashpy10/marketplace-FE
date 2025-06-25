@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Account from './pages/Account';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -28,7 +29,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/register" element={<Register setToken={setToken} />} />
-          <Route path="/account" element={<h2>My Account</h2>} />
+          <Route path="/account" element={<Account toekn={token}/>} />
         </Routes>
       </div>
     </div>
