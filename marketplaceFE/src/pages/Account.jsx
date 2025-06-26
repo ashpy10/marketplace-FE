@@ -57,6 +57,35 @@ const Account = () => {
     navigate("/login");
   };
 
+  //Add order button
+  const handleOrderButton = async () => {
+    const date = new Date().toLocaleDateString();
+    const note = "New order";
+
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          date,
+          note,
+        }),
+      });
+
+      if(response.ok) {
+        const newOrder = await response.json()
+        setOrders((prevOrders) => [newOrder, ...prevOrders])
+      } else {
+        throw new Error('Failed to create order')
+      }
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
   if (loading) return <div className="account-loading">Loading...</div>;
   if (error) return <div className="account-error">Error: {error}</div>;
 
@@ -71,6 +100,10 @@ const Account = () => {
       )}
 
       <h2 className="account-orders-title">My Orders</h2>
+
+      <button className="account-order-button" onClick={handleOrderClick}>
+        Place New Order
+      </button>
 
       {orders.length > 0 ? (
         <div className="account-grid">
