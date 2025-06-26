@@ -10,7 +10,7 @@ const ReviewForm = ({ productId, token, onReviewAdded }) => {
     setError('');
 
     try {
-      const response = await fetch(`/api/products/${productId}/reviews`, {
+      const response = await fetch(`/api/reviews/products/${productId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
