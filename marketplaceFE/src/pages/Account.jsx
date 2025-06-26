@@ -101,7 +101,7 @@ const Account = () => {
 
       <h2 className="account-orders-title">My Orders</h2>
 
-      <button className="account-order-button" onClick={handleOrderClick}>
+      <button className="account-order-button" onClick={handleOrderButton}>
         Place New Order
       </button>
 
@@ -116,7 +116,7 @@ const Account = () => {
               {order.note && (
                 <p className="account-item"><strong>Note:</strong> {order.note}</p>
               )}
-            </div>
+        </div>
           ))}
         </div>
       ) : (

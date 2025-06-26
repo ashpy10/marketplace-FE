@@ -15,9 +15,17 @@
   }
   
   .account-user-info {
+    background-color: #fff;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 320px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    font-size: 1rem;
     text-align: center;
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    background-color: transparent;
+    color: black;
+    border: 2px solid #0C6667;
   }
   
   .account-orders-title {
@@ -28,23 +36,26 @@
   }
   
   .account-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      justify-items: center;
   }
   
   .account-card {
-    background: #fff;
     border-radius: 12px;
+    background-color: #FFF6F3 ;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     padding: 2rem 1.5rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     transition: box-shadow 0.2s;
+
   }
   
   .account-card:hover {
-    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 24px #eea361;
   }
   
   .account-order-header {
