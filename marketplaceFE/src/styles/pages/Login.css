@@ -20,6 +20,9 @@
 }
 
 .auth-container label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
@@ -35,7 +38,7 @@
 .auth-container button {
   margin-top: 1rem;
   padding: 0.7rem;
-  background-color: #ff5722;
+  background-color: #aa3a36 ;
   color: white;
   border: none;
   border-radius: 8px;
@@ -54,9 +57,13 @@
 }
 
 .auth-container a {
-  color: #ff5722;
+  color: #aa3a36;
   text-decoration: none;
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .auth-container a:hover {

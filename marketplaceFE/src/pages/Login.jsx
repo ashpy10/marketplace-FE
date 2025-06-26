@@ -65,7 +65,7 @@ export default function Login({ setToken }) {
         </label>
         <button type="submit">Submit</button>
       </form>
-      <p>Dont have an account?</p>
+      <p>Don't have an account?</p>
       <Link to="/register">Sign Up</Link>
     </div>
   );
