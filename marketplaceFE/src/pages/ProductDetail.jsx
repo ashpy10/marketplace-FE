@@ -10,7 +10,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,25 +28,21 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      console.log("🧪 token =", token);
-      console.log("➡️ About to fetch reviews for product", id);
+useEffect(() => {
+  const fetchReviews = async () => {
+    console.log("➡️ Fetching reviews for product", id);
 
-      if (!token) return;
-      try {
-        const response = await fetch(`/api/reviews/products/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error("Could not fetch reviews");
-        const data = await response.json();
-        setReviews(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchReviews();
-  }, [id, token]);
+    try {
+      const response = await fetch(`/api/reviews/products/${id}`);
+      if (!response.ok) throw new Error("Could not fetch reviews");
+      const data = await response.json();
+      setReviews(data);
+    } catch (err) {
+      console.error("❌ Error fetching reviews:", err);
+    }
+  };
+  fetchReviews();
+}, [id]);
 
   if (loading) return <div className="product-detail-loading">Loading...</div>;
   if (error) return <div className="product-detail-error">{error}</div>;
@@ -55,6 +51,41 @@ const ProductDetail = () => {
   const handleReviewAdded = (newReview) => {
     setReviews((prev) => [newReview, ...prev]);
   };
+
+  const handleOrderButton = async () => {
+  const token = localStorage.getItem("authToken");
+  const date = new Date().toLocaleDateString();
+  const note = `Order for product: ${product.title}`;
+
+  if (!token) {
+    alert("You must be logged in to place an order.");
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        date,
+        note,
+        product_id: product.id,  // match backend key
+      }),
+    });
+
+    if (response.ok) {
+      alert("Order placed successfully!");
+    } else {
+      const errData = await response.json();
+      throw new Error(errData.error || "Failed to create order");
+    }
+  } catch (error) {
+    alert(`Error: ${error.message}`);
+  }
+};
 
   return (
     <div className="product-detail-container">
@@ -70,19 +101,23 @@ const ProductDetail = () => {
           <h1 className="product-detail-title">{product.title}</h1>
           <div className="product-detail-price">${product.price}</div>
           <p className="product-detail-description">{product.description}</p>
-          <button className="product-detail-buy-btn">Buy Now</button>
+          <button className="product-detail-buy-btn" onClick={handleOrderButton}>Order Now</button>
         </div>
       </div>
       <div className="product-detail-reviews-section">
         <h2>Latest Reviews</h2>
         <ReviewList reviews={reviews} />
-        {token && (
-          <ReviewForm
-            productId={id}
-            token={token}
-            onReviewAdded={handleReviewAdded}
-          />
-        )}
+        {token ? (
+  <ReviewForm
+    productId={id}
+    token={token}
+    onReviewAdded={handleReviewAdded}
+  />
+) : (
+  <p className="login-to-review-msg">
+    <em>You must <a href="/login">log in</a> to leave a review.</em>
+  </p>
+)}
       </div>
     </div>
   );
