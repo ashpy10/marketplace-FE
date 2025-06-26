@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../styles/pages/ProductDetail.css";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
   const token = localStorage.getItem("authToken");
+  const numericId = Number(id);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/products/${id}`);
+        const response = await fetch(`/api/products/${numericId}`);
         if (!response.ok) throw new Error("Product not found");
         const data = await response.json();
         setProduct(data);
@@ -26,23 +28,21 @@ const ProductDetail = () => {
       }
     };
     fetchProduct();
-  }, [id]);
+  }, [numericId]);
 
-useEffect(() => {
-  const fetchReviews = async () => {
-    console.log("➡️ Fetching reviews for product", id);
-
-    try {
-      const response = await fetch(`/api/reviews/products/${id}`);
-      if (!response.ok) throw new Error("Could not fetch reviews");
-      const data = await response.json();
-      setReviews(data);
-    } catch (err) {
-      console.error("❌ Error fetching reviews:", err);
-    }
-  };
-  fetchReviews();
-}, [id]);
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`/api/reviews/products/${numericId}`);
+        if (!response.ok) throw new Error("Could not fetch reviews");
+        const data = await response.json();
+        setReviews(data);
+      } catch (err) {
+        console.error("❌ Error fetching reviews:", err);
+      }
+    };
+    fetchReviews();
+  }, [numericId]);
 
   if (loading) return <div className="product-detail-loading">Loading...</div>;
   if (error) return <div className="product-detail-error">{error}</div>;
@@ -53,39 +53,37 @@ useEffect(() => {
   };
 
   const handleOrderButton = async () => {
-  const token = localStorage.getItem("authToken");
-  const date = new Date().toLocaleDateString();
-  const note = `Order for product: ${product.title}`;
-
-  if (!token) {
-    alert("You must be logged in to place an order.");
-    return;
-  }
-
-  try {
-    const response = await fetch('/api/orders', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        date,
-        note,
-        product_id: product.id,  // match backend key
-      }),
-    });
-
-    if (response.ok) {
-      alert("Order placed successfully!");
-    } else {
-      const errData = await response.json();
-      throw new Error(errData.error || "Failed to create order");
+    if (!token) {
+      alert("You must be logged in to place an order.");
+      return;
     }
-  } catch (error) {
-    alert(`Error: ${error.message}`);
-  }
-};
+    const orderDate = new Date().toISOString().split('T')[0];
+    const note = `Order for product: ${product.title}`;
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          date: orderDate,
+          note,
+          product_id: Number(product.id),
+        }),
+      });
+
+      if (response.ok) {
+        alert("Order placed successfully!");
+        navigate('/account');
+      } else {
+        const errData = await response.json();
+        throw new Error(errData.error || "Failed to create order");
+      }
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <div className="product-detail-container">
@@ -107,17 +105,11 @@ useEffect(() => {
       <div className="product-detail-reviews-section">
         <h2>Latest Reviews</h2>
         <ReviewList reviews={reviews} />
-        {token ? (
-  <ReviewForm
-    productId={id}
-    token={token}
-    onReviewAdded={handleReviewAdded}
-  />
-) : (
-  <p className="login-to-review-msg">
-    <em>You must <a href="/login">log in</a> to leave a review.</em>
-  </p>
-)}
+          <ReviewForm
+            productId={numericId}
+            token={token}
+            onReviewAdded={handleReviewAdded}
+          />
       </div>
     </div>
   );
